@@ -15,7 +15,7 @@ export class Root extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    setTimeout(() => this.setStates({ showLoader: false }), 1000);
+    setTimeout(() => this.setState({ showLoader: false }), 1000);
   }
   render() {
     return (
