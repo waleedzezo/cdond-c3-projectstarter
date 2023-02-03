@@ -1,5 +1,7 @@
 version: 2.1
 
+orbs:
+  slack: circleci/slack@4.1
             
 jobs:
   build-frontend:
@@ -15,6 +17,10 @@ jobs:
                cd frontend
                npm install
                npm run build
+      - slack/notify:
+          event: fail
+          mentions: '@EngineeringTeam'
+          template: basic_fail_1
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
