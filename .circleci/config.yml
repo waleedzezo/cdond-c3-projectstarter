@@ -59,7 +59,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [test-backend1]
+          keys: [backend-build]
       - run:
           name: test backend
           command : |
@@ -68,7 +68,7 @@ jobs:
              npm run test
       - save_cache:
           paths: [backend/node_modules]
-          key: test-backend1
+          key: backend-build
   
 workflows:
   default:
