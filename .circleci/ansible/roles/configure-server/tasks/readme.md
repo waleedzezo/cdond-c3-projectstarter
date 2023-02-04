@@ -1,1 +1,1 @@
-## Back-end sesrver configuration playbook goes here.
+## Back-end sesrver configuradtion playbook goes here.
