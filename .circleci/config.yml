@@ -24,17 +24,6 @@ commands:
           command: |
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.id >>
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.id >>
-
-  revert-migrations:
-    description: Revert migration
-    steps:
-      - run:
-          name: Revert migrations
-          when: on_fail
-          command: |
-              cd ~/project/backend
-              npm install
-              npm run migration:revert
             
             
 jobs:
