@@ -213,7 +213,6 @@ jobs:
             sudo apt-get install -y awscli
       - run:
           name: Run migrations
-          working_directory: ./backend
           command: |
             cd backend
             npm install
