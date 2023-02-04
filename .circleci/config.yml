@@ -158,9 +158,9 @@ jobs:
           working_directory: ./.circleci/ansible
           command: |
             aws ec2 describe-instances \
-              --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --output text >> inventory.txt
+                 --filter "Name=instance-state-name,Values=running" \
+                 --query "Reservations[*].Instances[*].[PublicIpAddress, Tags[?Key=='Name'].Value|[0]]" \
+                 --output text >> inventory.txt
             cat inventory.txt
       - persist_to_workspace:
           root: ~/
