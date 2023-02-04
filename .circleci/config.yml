@@ -171,8 +171,7 @@ jobs:
           when: on_fail
   
   configure-infrastructure:
-    docker:
-      - image: python:3.7-alpine3.11
+    executor: python
     steps:
       - checkout
       - add_ssh_keys:
