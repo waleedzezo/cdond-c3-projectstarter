@@ -246,8 +246,11 @@ jobs:
           command: |
                  yum update tar gzip ansible
                  yum install -y awscli
-                 yum install nodejs
-                 yum install npm
+                 yum install -y gcc-c++ make 
+                 curl -sL https://rpm.nodesource.com/setup_18.x | sudo -E bash - 
+                 yum install -y nodejs
+                 node -v
+                 npm -v
       - run:
           name: Get backend url
           command: |
