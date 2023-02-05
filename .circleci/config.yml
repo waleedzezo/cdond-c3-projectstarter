@@ -244,10 +244,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-                 apk add --update tar gzip ansible
+                 apt-get update tar gzip ansible
                  apt-get install -y awscli
                  apt-get install nodejs
-                 apt install npm
+                 apt-get install npm
       - run:
           name: Get backend url
           command: |
