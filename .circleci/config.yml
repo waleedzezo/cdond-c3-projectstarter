@@ -356,9 +356,10 @@ jobs:
             echo "${API_URL}"
              if curl "${API_URL}/api/status" | grep "ok"
              then
-               return 0
+              echo "Backend is up & running ...."
+               exit 0
              else
-               return 1
+               exit 1
              fi
       - run:
           name: Frontend smoke test.
@@ -373,33 +374,33 @@ jobs:
                    return 1
                 fi
       # Here's where you will add some code to rollback on failure  
-     # - destroy-environment:
-      #    id: ${CIRCLE_WORKFLOW_ID:0:7}
-       #   when: on_fail
-      #- revert-migrations
+      - destroy-environment:
+          id: ${CIRCLE_WORKFLOW_ID:0:7}
+          when: on_fail
+      - revert-migrations
 
 workflows:
   default:
     jobs:
-      #- build-frontend
+      - build-frontend
       - build-backend
-      #- test-frontend:
-       #   requires: [build-frontend]
-     # - test-backend:
-     #     requires: [build-backend]
-     # - scan-frontend:
-      #    requires: [build-frontend]
-      #- scan-backend:
-      #    requires: [build-backend]
-      #- deploy-infrastructure:
-      #    requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-      #- configure-infrastructure:
-      #    requires: [deploy-infrastructure]
-      #- run-migrations:
-       #   requires: [configure-infrastructure]
-      #- deploy-frontend:
-      #    requires: [build-frontend]
-      - deploy-backend:
+      - test-frontend:
+          requires: [build-frontend]
+      - test-backend:
           requires: [build-backend]
+      - scan-frontend:
+          requires: [build-frontend]
+      - scan-backend:
+          requires: [build-backend]
+      - deploy-infrastructure:
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
+      - deploy-frontend:
+          requires: [run-migrations]
+      - deploy-backend:
+          requires: [run-migrations]
       - smoke-test:
-          requires: [deploy-backend]
+          requires: [deploy-frontend,deploy-backend]
