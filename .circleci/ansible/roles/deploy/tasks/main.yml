@@ -1,27 +1,32 @@
 ---
 - name: Create web directory
+  become: true
   file:
     path: "~/backend-app"
     state: directory
 
 
 - name: Extract zipped artifact
+  become: true
   unarchive:
     src: artifact.tar.gz
     dest: ~/backend-app
 
 - name: Install npm dependencies
+  become: true
   shell: |
     cd ~/backend-app
     npm i
 
 - name: Start app with pm2
+  become: true
   shell: |
     cd ~/backend-app/dist
     pm2 stop default
     pm2 start main.js
     
 - name: "Configuring pm2 to start as service"
+  become: true
   shell: |
     sudo su -c "env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu"
     pm2 save
