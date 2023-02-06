@@ -1,9 +1,39 @@
 ---
-- name: Create web directory
+- name: "upgrade packages."
   become: true
-  file:
-    path: "~/backend-app"
-    state: directory
+  apt:
+    upgrade: "yes"
+
+- name: "install dependencies."
+  become: true
+  apt:
+    name: ["nodejs", "npm"]
+    state: latest
+    update_cache: yes
+
+- name: "install pm2"
+  become: true
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
+
+- name: "extract artifact"
+  become: true
+  unarchive:
+    src: files/artifact.tar.gz
+    dist: .
+
+- name: "start app"
+  become: true
+  shell: | 
+   pm2 stop all
+   pm2 start npm -- start
+    
+
+
+
 
 
 - name: Extract zipped artifact
