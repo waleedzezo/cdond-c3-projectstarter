@@ -1,21 +1,25 @@
-  ---
-- name: Create backend dir
+---
+- name: "Create Backend Dir"
+  become: true
   file:
     path: "~/backend-dir"
     state: directory
 
 
-- name: Extract artifact
+- name: "Extract Artifact"
+  become: true
   unarchive:
     src: artifact.tar.gz
     dest: ~/backend-dir
 
-- name: Install dependencies
+- name: "Install Dependencies"
+  become: true
   shell: |
     cd ~/backend-dir
     npm i
 
-- name: Start pm2
+- name: "Start pm2"
+  become: true
   shell: |
     cd ~/backend-dir/dist
     pm2 delete all
