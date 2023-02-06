@@ -2,7 +2,7 @@
 - name: "Create Backend Dir"
   become: true
   file:
-    path: "~/backend-dir"
+    path: "/home/ubuntu/backend_dir"
     state: directory
 
 
@@ -10,17 +10,17 @@
   become: true
   unarchive:
     src: artifact.tar.gz
-    dest: ~/backend-dir
+    dest: /home/ubuntu/backend_dir
 
 - name: "Install Dependencies"
   become: true
   shell: |
-    cd ~/backend-dir
+    cd home/ubuntu/backend_dir
     npm i
 
 - name: "Start pm2"
   become: true
   shell: |
-    cd ~/backend-dir/dist
+    cd home/ubuntu/backend_dir/dist
     pm2 delete all
     pm2 start main.js
