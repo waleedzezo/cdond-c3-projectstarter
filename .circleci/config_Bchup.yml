@@ -253,7 +253,7 @@ cleanup:
           command: |
             # your code here
             export OldWorkflowID="the id here"
-            export STACKS=[] #put the list of stacks here
+            export STACKS==[] #put the list of stacks here
       - run:
           name: Remove old stacks and files
           command: |
