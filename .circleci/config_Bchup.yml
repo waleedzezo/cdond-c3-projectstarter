@@ -93,7 +93,7 @@ jobs:
     docker:
       # Docker image here
     steps:
-      # Checkout code from git
+      # Checkout code from giit
       # Restore from cache
       # Your job code here
 
