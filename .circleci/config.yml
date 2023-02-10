@@ -427,12 +427,26 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
+          name: Install dependencies
+          command: |
+            # install AWS CLI
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+
+      - run:
           name: Remove old stacks and files
           command: |
+
                OldWorkflowID=$(cat ~/OldWorkflowID.txt)
                echo OldWorkflowID: "${OldWorkflowID}"
                echo Current_CIRCLE_WORKFLOW_ID: "${CIRCLE_WORKFLOW_ID:0:7}"
-           if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]]
+          # Fetch the stack names 
+            export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
+                 --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
+                echo Stack names: "${STACKS[@]}" 
+
+           if [[ "${OldWorkflowID}" =~ "${STACKS[@]}"  ]]
             then
               echo '-----------------Delete Confirmed-----------------'  
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
