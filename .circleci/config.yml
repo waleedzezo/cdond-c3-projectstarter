@@ -428,8 +428,8 @@ jobs:
           at: ~/
 
       - run:  
-          name: Remove old stacks and files
-          command: |
+        name: Remove old stacks and files
+        command: |
                OldWorkflowID=$(cat ~/OldWorkflowID.txt)
                echo OldWorkflowID: "${OldWorkflowID}"
                echo Current_CIRCLE_WORKFLOW_ID: "${CIRCLE_WORKFLOW_ID:0:7}"
