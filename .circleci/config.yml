@@ -433,10 +433,6 @@ jobs:
                echo OldWorkflowID: "${OldWorkflowID}"
                echo Current_CIRCLE_WORKFLOW_ID: "${CIRCLE_WORKFLOW_ID:0:7}"
 
-               export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
-                 --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
-           
-
            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]]
             then
               echo '-----------------Delete Confirmed-----------------'  
