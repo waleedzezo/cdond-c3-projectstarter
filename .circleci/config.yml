@@ -369,9 +369,9 @@ jobs:
                 if curl -s ${URL} | grep "Welcome"
                 then
                     echo "Frontend is up & running ...."
-                      return 1
+                      exit 0
                 else
-                      return 1
+                      exit 1
                 fi
       # Here's where you will add some code to rollback on failure  
       - destroy-environment:
