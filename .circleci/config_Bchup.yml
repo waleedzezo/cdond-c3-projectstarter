@@ -94,7 +94,7 @@ jobs:
       # Docker image here
     steps:
       # Checkout code from giit
-      # Restore from cache
+      # Restorse from cache
       # Your job code here
 
   deploy-infrastructure:
