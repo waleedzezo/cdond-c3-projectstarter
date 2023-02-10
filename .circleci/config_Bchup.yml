@@ -245,7 +245,7 @@ jobs:
 
 cleanup:
     docker:
-      # Docker image here
+      # Dockerd image here
     steps:
       # Checkout code from git
       - run:
