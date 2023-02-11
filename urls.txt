@@ -1,4 +1,6 @@
 ### Repo URL
 https://github.com/waleedzezo/cdond-c3-projectstarter
 
-URL02: https://udapeople-47ea442.s3.amazonaws.com/index.html
+URL02: http://udapeople-81ed624.s3.amazonaws.com/index.html#/employees
+
+URL03: http://d36gkqsab0a7kw.cloudfront.net/index.html#/employees
