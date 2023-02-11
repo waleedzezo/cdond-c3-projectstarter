@@ -94,7 +94,7 @@ jobs:
       # Docker image here
     steps:
       # Checkout code from giit
-      # Restorse frsddom cache
+      # Restorse frsddsom cache
       # Your job code here
 
   deploy-infrastructure:
